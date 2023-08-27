@@ -34,10 +34,10 @@ import com.example.batch.model.user;
 public class batchconfig {
 	
 	@Autowired
-	private JobRepository jobRepository;
-	
+	private  StepBuilderFactory stepBuilderFactory;
+
 	@Autowired
-	private PlatformTransactionManager transactionManager;
+	private JobBuilderFactory jobBuilderFactory;
 
 
 	@Autowired
@@ -149,7 +149,7 @@ public class batchconfig {
 				.build();
 	}
 
-	 */
+	 
 
 
 
@@ -170,7 +170,27 @@ public class batchconfig {
 				.flow(step1).end().build();
 
 
+	} */
+
+	@Bean
+	public Job importUserJob()
+	{
+		return this.jobBuilderFactory.get("USER-IMPORT-JOB")
+		.incrementer(new RunIdIncrementer())
+			.flow(step1()).end().build();
+		
+				
 	}
+
+
+	@Bean
+	public Step step1() {
+		 return this.stepBuilderFactory.get("step1").
+				<user, user>chunk(10)
+				.reader(reader()).processor(processor()).writer(writer())
+				.build();
+	}
+
 
 
 
