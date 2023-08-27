@@ -65,9 +65,9 @@ public class batchconfig {
 	@Bean
 	public LineMapper<user> getLineMapper() {
 		// TODO Auto-generated method stub
-		DefaultLineMapper<user> defaultLineMapper=	new DefaultLineMapper<user>();
+		DefaultLineMapper<user> defaultLineMapper=new DefaultLineMapper<>();
 		
-		DelimitedLineTokenizer d=	new DelimitedLineTokenizer();
+		DelimitedLineTokenizer d=new DelimitedLineTokenizer();
 		
 		d.setNames(new String[] {"ID","FIRSTNAME","SECONDNAME","STREET","CITY","STATE CODE","PINCODE"});
 		d.setIncludedFields(new int[] {0,1,2,3,4,5,6});
